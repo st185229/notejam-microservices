@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: tls-secret
+  namespace: ingress-notejam
+spec:
+  secretName: tls-secret
+  dnsNames:
+    - nordcloud.eastus.cloudapp.azure.com
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - nordcloud.eastus.cloudapp.azure.com
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer

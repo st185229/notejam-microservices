@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-notejam
+  namespace: ingress-notejam
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aks-notejam
+  template:
+    metadata:
+      labels:
+        app: aks-notejam
+    spec:
+      containers:
+        - name: aks-notejam
+          image: acrnoedjam.azurecr.io/notejam:nordcloud30
+          ports:
+            - containerPort: 80
+          env:
+            - name: TITLE
+              value: "Welcome to Nord Cloud NoteJam"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aks-notejam
+  namespace: ingress-notejam
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    app: aks-notejam
