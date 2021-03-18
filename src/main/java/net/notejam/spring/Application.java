@@ -97,6 +97,7 @@ public class Application {
     @Bean
     public LocaleResolver localeResolver(final MessageSource messageSource) throws UnsupportedLocaleException {
         checkDefaultLocale(messageSource);
+
         return new AcceptHeaderLocaleResolver();
     }
 
